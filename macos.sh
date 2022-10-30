@@ -39,3 +39,6 @@ echo -e "=> ${_cyan}masfile:${_nc} ${masfile}"
 brew bundle --file=${masfile}
 
 brew_cleanup
+
+source scripts/configure.sh
+configure_zsh
