@@ -1,0 +1,141 @@
+" vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'              " plugin manager
+Plugin 'scrooloose/nerdtree'            " show project tree
+Plugin 'vim-airline/vim-airline'        " airline for vim
+Plugin 'vim-airline/vim-airline-themes' " airline themes
+Plugin 'tpope/vim-fugitive'             " git branch on airline
+Plugin 'dense-analysis/ale'             " syntax checker
+Plugin 'hashivim/vim-terraform'         " terraform support
+Plugin 'google/vim-jsonnet'             " jsonnet support
+Plugin 'frazrepo/vim-rainbow'
+Plugin 'doums/darcula'                  " colorscheme
+Plugin 'morhetz/gruvbox'                " colorscheme
+
+call vundle#end()
+filetype plugin indent on
+
+
+" general
+set background=dark     " optimise colors for dark backrounds
+syntax on               " enable highlighting
+colorscheme gruvbox     " colorscheme
+set nu                  " show line numbers
+set noswapfile          " do not create swap files
+set encoding=utf-8      " utf-8 encoding
+
+" natural horizontal split (new windows from a horizontal split should be below the current one)
+set splitbelow
+" natural vertical split (new windows from a vertical split should be right of the current one)
+set splitright
+" use standard and selection clipboard (source: https://stackoverflow.com/a/30691754)
+set clipboard^=unnamed,unnamedplus
+
+set autoindent              " automatically indent new lines to match the previous line
+set copyindent              " when autoindenting copy the structure of the previous line
+set hlsearch                " highlight search results
+set incsearch               " search incrementally (i.e. start matching immediately
+set wildmenu                " enable menu to resolve ambiguous command completions
+set wildignorecase          " ignore case when completing file names and directories
+set mouse=a                 " enable mouse in all modes
+set mousemodel=popup_setpos "
+set showcmd
+set colorcolumn=+1
+set lazyredraw
+set incsearch
+set tabpagemax=5
+set laststatus=2
+set backspace=indent,eol,start
+
+
+"" airline settings
+let g:airline_powerline_fonts=0
+let g:airline_theme='minimalist'
+let g:airline#extensions#tabline#formatter='short_path'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#branch#enabled=1
+
+"" ale settings
+let g:ale_sign_error='!'
+let g:ale_sign_warning='.'
+let b:ale_linters={
+    \ 'go': ['gofmt'],
+    \ 'python': ['flake8', 'pylint'],
+    \ 'yaml': ['yamllint']
+    \ }
+let g:ale_fixers={
+    \ 'go': ['gofmt', 'goimports'],
+    \ '*': ['remove_trailing_lines', 'trim_whitespace']
+    \ }
+let g:ale_fix_on_save=1
+let g:terraform_fmt_on_save=1 " automatically format tf files
+
+"" nerdtree settings
+let NERDTreeMapActivateNode='<space>'
+" let NERDTreeIgnore=['\.pyc$', '\~$']  " ignore pyc and files in NERDTree
+au bufread,bufnewfile *.py,*.go,*.yml,*.tf,*.tfvars,*.json,*.jsonnet,*.html,*.css,*.js
+    \ au vimenter * NERDTreeFind 			        " open nerdtree automatically
+au bufread,bufnewfile *.py,*.go,*.yml,*.tf,*.tfvars,*.json,*.jsonnet,*.html,*.css,*.js
+    \ au vimenter * wincmd p			        " focus on file instead of tree
+au bufread,bufnewfile *.py,*.go,*.yml,*.tf,*.tfvars,*.json,*.jsonnet,*.html,*.css,*.js
+    \ au bufenter * if (winnr("$") == 1 &&
+        \ exists("b:NERDTree") &&
+        \ b:NERDTree.isTabTree()) | q | endif	" close nerdtree automatically
+
+"" rainbow settings
+let g:rainbow_activate=1
+let g:rainbow_ctermfgs=['167']
+let g:rainbow_load_separately=[
+    \ [ '.go' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ ]
+au FileType go call rainbow#load()
+
+
+" all files
+set fileformat=unix     " create \n at the end of file
+set textwidth=99        " max line length
+set tabstop=4           " tab inserts spaces
+set shiftwidth=4        " spaces for autoindent
+set softtabstop=4       " move coursor for 4 spaces
+set expandtab           " tab character eq 4 spaces
+
+" commit messages
+autocmd BufNewFile,BufRead PULLREQ_EDITMSG set syntax=gitcommit
+setlocal textwidth=72
+
+"" python files
+au bufread,bufnewfile *.py set textwidth=79	" max line length
+
+"" go files
+au bufread,bufnewfile *.go set textwidth=99	" max line length
+au BufRead,bufnewfile *.go set noexpandtab	" tab character eq tab character
+
+"" yaml files
+au bufread,bufnewfile *.yml,*.yaml set textwidth=79     " max line length
+au bufread,bufnewfile *.yml,*.yaml set tabstop=2        " tab inserts spaces
+au bufread,bufnewfile *.yml,*.yaml set shiftwidth=2     " spaces for autoindent
+au bufread,bufnewfile *.yml,*.yaml set softtabstop=2    " move coursor for 2 spaces
+
+"" terraform files
+au BufRead,BufNewFile *.tf,*.tfvars set textwidth=79 	" max line lenght
+au BufRead,BufNewFile *.tf,*.tfvars set tabstop=2       " tab character eq 4 spaces
+au BufRead,BufNewFile *.tf,*.tfvars set shiftwidth=2 	" spaces for autoindent
+au BufRead,BufNewFile *.tf,*.tfvars set softtabstop=2 	" move coursor for 4 spaces
+
+"" json/jsonnet files
+au BufRead,BufNewFile *json,*.jsonnet set textwidth=79  " max line lenght
+au BufRead,BufNewFile *json,*.jsonnet set tabstop=2     " tab character eq 4 spaces
+au BufRead,BufNewFile *json,*.jsonnet set shiftwidth=2 	" spaces for autoindent
+au BufRead,BufNewFile *json,*.jsonnet set softtabstop=2 " move coursor for 4 spaces
+
+"" jenkinsfiles
+au BufNewFile,BufRead *.Jenkinsfile setf groovy j Jenkinsfiles as groovy files
+
+"" html, css, js files
+au bufread,bufnewfile *.html,*.css,*js set tabstop=2        " tab inserts spaces
+au bufread,bufnewfile *.html,*.css,*js set shiftwidth=2     " spaces for autoindent
+au bufread,bufnewfile *.html,*.css,*js set softtabstop=2    " move coursor for 2 spaces

@@ -1,8 +1,8 @@
 #! /bin/bash
 
 configure_zsh() {
-    echo -e "${_green}configuring zsh${_nc}" 
-    
+    echo -e "${_green}configuring zsh${_nc}"
+
     ls $HOME/.oh-my-zsh > /dev/null 2>&1
     if [[ $? != 0 ]]; then
         echo "oh ny zsh is not installed"
@@ -11,7 +11,7 @@ configure_zsh() {
     else
         echo "oh my zsh has been alredy installed"
     fi
-    
+
     # zshrc
     echo -e "=> ${_cyan}zshrc:${_nc}"
     _create_symlink "configs/zshrc" "${HOME}/.zshrc"
@@ -28,10 +28,35 @@ configure_zsh() {
     echo -e "${_green}zsh has been configured${_nc}"
 }
 
+configure_vim() {
+    echo -e "${_green}configuring vim${_nc}"
+
+    echo -e "=> ${_cyan}vim:${_nc}"
+    local vimdir="${HOME}/.vim"
+    if [[ ! -d "${vimdir}" ]]; then
+        mkdir "${vimdir}"
+    fi
+    _create_symlink "configs/vimrc" "${HOME}/.vim/vimrc"
+
+    echo -e "=> ${_cyan}installing vundle:${_nc}"
+    ls "${vimdir}/bundle/Vundle.vim" > /dev/null 2>&1
+    if [[ $? != 0 ]]; then
+        echo "vundle is not installed"
+        git clone https://github.com/VundleVim/Vundle.vim.git
+    else
+        echo "vundle has been alredy installed"
+    fi
+
+    echo -e "=> ${_cyan}installing vim plugins:${_nc}"
+    vim +PluginInstall +qall
+
+    echo -e "${_green}vim has been configured${_nc}"
+}
+
 _install_zsh_plugin() {
     local dst=$1
     local plugin=$2
-    
+
     echo -e "=> ${_cyan}installing zsh plugin:${_nc} ${plugin}"
     if [[ -d ${dst}/${plugin} ]]; then
         echo "${plugin} has been already installed"
@@ -43,7 +68,7 @@ _install_zsh_plugin() {
 
 _install_custom_zsh_theme() {
     local theme_name=$1
-    
+
     local themes_path="${HOME}/.oh-my-zsh/custom/themes"
     echo -e "=> ${_cyan}installing custom theme:${_nc} ${theme_name}"
     _create_symlink "configs/${theme_name}" "${themes_path}/${theme_name}"
@@ -52,13 +77,13 @@ _install_custom_zsh_theme() {
 _create_symlink() {
     local src=$1
     local dst=$2
-    
+
     cat ${dst} > /dev/null 2>&1
     if [[ $? != 0 ]]; then
         echo "creating symlink"
     	local root_dir="$(git rev-parse --show-toplevel)"
         ln -s "${root_dir}/${src}" ${dst}
-	echo "symlink created"
+	    echo "symlink created"
     else
         echo "symlink has been already created"
     fi
