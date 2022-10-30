@@ -35,7 +35,6 @@ prompt_git() {
     fi
 
     local ref dirty head mode repo_path
-	
     if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]; then
         repo_path=$(git rev-parse --git-dir 2>/dev/null)
         ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="$(git rev-parse --short HEAD 2> /dev/null)"
@@ -107,4 +106,4 @@ build_prompt() {
     prompt_end
 }
 
-PROMPT="$(build_prompt) "
+PROMPT='$(build_prompt) '
