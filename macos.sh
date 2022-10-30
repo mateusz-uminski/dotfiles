@@ -43,3 +43,4 @@ brew_cleanup
 source scripts/configure.sh
 configure_zsh
 configure_vim
+configure_vscode

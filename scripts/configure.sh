@@ -53,6 +53,24 @@ configure_vim() {
     echo -e "${_green}vim has been configured${_nc}"
 }
 
+configure_vscode() {
+    echo -e "${_green}configuring vscode${_nc}"
+
+    local vscdir="${HOME}/.vscode"
+    if [[ ! -d "${vscdir}" ]]; then
+        mkdir "${vscdir}"
+    fi
+
+    # settings.json
+    echo -e "=> ${_cyan}vscode:${_nc}"
+    _create_symlink "configs/vscode.json" "${vscdir}/settings.json"
+
+    # install vsc extensions
+    _install_vsc_extension "ms-python.python"
+
+    echo -e "${_green}vscode has been configured${_nc}"
+}
+
 _install_zsh_plugin() {
     local dst=$1
     local plugin=$2
@@ -87,4 +105,10 @@ _create_symlink() {
     else
         echo "symlink has been already created"
     fi
+}
+
+_install_vsc_extension() {
+    local extension=$1
+    echo -e "=> ${_cyan}installing vscode extension:${_nc} ${extension}"
+    code --install-extension "${extension}" --force
 }
