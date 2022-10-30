@@ -21,6 +21,10 @@ masfile="./os/macos/mas.Brewfile"
 echo -e "${_bgreen}configuring macos${_nc}"
 source scripts/system.sh
 system_info
+source os/macos/settings.sh
+settings_system
+settings_finder
+settings_safari
 
 source scripts/brew.sh
 brew_install
