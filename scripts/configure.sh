@@ -71,6 +71,14 @@ configure_vscode() {
     echo -e "${_green}vscode has been configured${_nc}"
 }
 
+configure_git() {
+    echo -e "${_green}configuring git${_nc}"
+
+    echo -e "=> ${_cyan}global gitignore:${_nc}"
+    _create_symlink "configs/gitignore-global" "${HOME}/.gitignore"
+    git config --global core.excludesfile "${HOME}/.gitignore"
+}
+
 _install_zsh_plugin() {
     local dst=$1
     local plugin=$2
