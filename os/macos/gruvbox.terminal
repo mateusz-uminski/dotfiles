@@ -244,8 +244,12 @@
 	<true/>
 	<key>VisualBell</key>
 	<false/>
+	<key>columnCount</key>
+	<integer>120</integer>
 	<key>name</key>
 	<string>gruvbox</string>
+	<key>rowCount</key>
+	<integer>36</integer>
 	<key>shellExitAction</key>
 	<integer>2</integer>
 	<key>type</key>
