@@ -27,6 +27,7 @@ colorscheme gruvbox     " colorscheme
 set nu                  " show line numbers
 set noswapfile          " do not create swap files
 set encoding=utf-8      " utf-8 encoding
+set viminfofile=NONE    " disable viminfo file
 
 " natural horizontal split (new windows from a horizontal split should be below the current one)
 set splitbelow
