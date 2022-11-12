@@ -54,6 +54,8 @@ configure_vim() {
 }
 
 configure_vscode() {
+    local user_settings_path=$1
+
     echo -e "${_green}configuring vscode${_nc}"
 
     local vscdir="${HOME}/.vscode"
@@ -63,7 +65,8 @@ configure_vscode() {
 
     # settings.json
     echo -e "=> ${_cyan}vscode:${_nc}"
-    _create_symlink "configs/vscode.json" "${vscdir}/settings.json"
+    rm "${user_settings_path}/settings.json"  # delete existing settings
+    _create_symlink "configs/vscode.json" "${user_settings_path}/settings.json"
 
     # install vsc extensions
     _install_vsc_extension "ms-python.python"
