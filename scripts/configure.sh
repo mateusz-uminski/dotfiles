@@ -107,11 +107,11 @@ _create_symlink() {
     local src=$1
     local dst=$2
 
-    cat ${dst} > /dev/null 2>&1
+    cat "${dst}" > /dev/null 2>&1
     if [[ $? != 0 ]]; then
         echo "creating symlink"
     	local root_dir="$(git rev-parse --show-toplevel)"
-        ln -s "${root_dir}/${src}" ${dst}
+        ln -s "${root_dir}/${src}" "${dst}"
 	    echo "symlink created"
     else
         echo "symlink has been already created"
