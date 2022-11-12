@@ -54,6 +54,8 @@ configure_vim() {
 }
 
 configure_vscode() {
+    local user_settings_path=$1
+
     echo -e "${_green}configuring vscode${_nc}"
 
     local vscdir="${HOME}/.vscode"
@@ -63,7 +65,8 @@ configure_vscode() {
 
     # settings.json
     echo -e "=> ${_cyan}vscode:${_nc}"
-    _create_symlink "configs/vscode.json" "${vscdir}/settings.json"
+    rm "${user_settings_path}/settings.json"  # delete existing settings
+    _create_symlink "configs/vscode.json" "${user_settings_path}/settings.json"
 
     # install vsc extensions
     _install_vsc_extension "ms-python.python"
@@ -104,11 +107,11 @@ _create_symlink() {
     local src=$1
     local dst=$2
 
-    cat ${dst} > /dev/null 2>&1
+    cat "${dst}" > /dev/null 2>&1
     if [[ $? != 0 ]]; then
         echo "creating symlink"
     	local root_dir="$(git rev-parse --show-toplevel)"
-        ln -s "${root_dir}/${src}" ${dst}
+        ln -s "${root_dir}/${src}" "${dst}"
 	    echo "symlink created"
     else
         echo "symlink has been already created"
