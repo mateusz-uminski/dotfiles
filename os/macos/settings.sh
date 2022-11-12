@@ -25,6 +25,9 @@ settings_system() {
 
     echo "disable user interface sound effect"
     defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
+
+    echo "do not wrap previous command with square brackets"
+    defaults write com.apple.Terminal AutoMarkPromptLine -int 0
 }
 
 settings_finder() {
