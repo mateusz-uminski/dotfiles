@@ -6,6 +6,7 @@
   
   // files
   "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   
   // terraform plugin
   "terraform.experimentalFeatures.validateOnSave": true,
