@@ -70,6 +70,9 @@ configure_vscode() {
 
     # install vsc extensions
     _install_vsc_extension "ms-python.python"
+    _install_vsc_extension "ms-python.isort"
+    _install_vsc_extension "jdinhlife.gruvbox"
+    _install_vsc_extension "hashicorp.terraform"
 
     echo -e "${_green}vscode has been configured${_nc}"
 }
