@@ -127,6 +127,12 @@ au BufRead,BufNewFile *.tf,*.tfvars set tabstop=2       " tab character eq 4 spa
 au BufRead,BufNewFile *.tf,*.tfvars set shiftwidth=2 	" spaces for autoindent
 au BufRead,BufNewFile *.tf,*.tfvars set softtabstop=2 	" move coursor for 4 spaces
 
+"" terragrunt files
+au BufRead,BufNewFile *.hcl, set textwidth=79   " max line lenght
+au BufRead,BufNewFile *.hcl, set tabstop=2      " tab character eq 4 spaces
+au BufRead,BufNewFile *.hcl, set shiftwidth=2   " spaces for autoindent
+au BufRead,BufNewFile *.hcl, set softtabstop=2  " move coursor for 4 spaces
+
 "" json/jsonnet files
 au BufRead,BufNewFile *json,*.jsonnet set textwidth=79  " max line lenght
 au BufRead,BufNewFile *json,*.jsonnet set tabstop=2     " tab character eq 4 spaces
