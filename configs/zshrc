@@ -66,6 +66,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT=true
 export LESSHISTFILE=-
 # export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd  # standard ls color scheme
 export LSCOLORS=Gxfxcxdxcxegedabagacad
+export HOMEBREW_NO_AUTO_UPDATE=1
 export ltmp="${_tmp}"
 export lbin="${_bin}"
 export PATH="${PATH}:/${lbin}"
