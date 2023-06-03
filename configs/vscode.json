@@ -22,4 +22,14 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2
   },
+  "[python]": {
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[css]": {
+    "editor.tabSize": 2
+  }
 }
