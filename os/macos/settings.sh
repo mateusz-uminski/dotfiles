@@ -28,6 +28,16 @@ settings_system() {
 
     echo "do not wrap previous command with square brackets"
     defaults write com.apple.Terminal AutoMarkPromptLine -int 0
+
+    echo "disable double space shortcut for entering a period"
+    defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
+
+    echo "disable spelling correction"
+    defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+
+    echo "disable text completion"
+    defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
+
 }
 
 settings_finder() {
