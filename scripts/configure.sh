@@ -73,6 +73,7 @@ configure_vscode() {
     _install_vsc_extension "ms-python.isort"
     _install_vsc_extension "jdinhlife.gruvbox"
     _install_vsc_extension "hashicorp.terraform"
+    _install_vsc_extension "hediet.vscode-drawio"
 
     echo -e "${_green}vscode has been configured${_nc}"
 }
