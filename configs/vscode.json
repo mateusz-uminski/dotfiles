@@ -27,7 +27,8 @@
     "editor.tabSize": 2
   },
   "[python]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
   },
   "[html]": {
     "editor.formatOnSave": true,
