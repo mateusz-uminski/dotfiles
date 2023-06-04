@@ -1,4 +1,7 @@
 {
+  // workbench
+  "workbench.colorTheme": "Gruvbox Dark Medium"
+
   // editor
   "editor.tabCompletion": "on",
   "editor.rulers": [80,100,120],
