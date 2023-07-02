@@ -13,3 +13,5 @@ cask "visual-studio-code"
 cask "vagrant"
 
 cask "spotify"
+
+cask "aws-vpn-client"
