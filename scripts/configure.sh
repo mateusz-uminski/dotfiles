@@ -71,6 +71,7 @@ configure_vscode() {
     # install vsc extensions
     _install_vsc_extension "ms-python.python"
     _install_vsc_extension "ms-python.isort"
+    _install_vsc_extension "ms-python.vscode-pylance"
     _install_vsc_extension "jdinhlife.gruvbox"
     _install_vsc_extension "hashicorp.terraform"
     _install_vsc_extension "hediet.vscode-drawio"
