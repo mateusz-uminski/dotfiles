@@ -85,11 +85,11 @@ settings_safari() {
 settings_xcode() {
     echo -e "=> ${_cyan}xcode${_nc}:"
 
-    echo "active developer directory"
-    xcode-select -p
+    echo "install command line developer tools"
+    xcode-select -p > /dev/null
     if [[ $? != 0 ]]; then
-        echo -e "${_red}bxcode is not installed${_nc}"
-        xcode-select --install
-        xcode-select -p
+        sudo xcode-select --install
     fi
+    directory=$(xcode-select -p)
+    echo "active developer directory: ${directory}"
 }
