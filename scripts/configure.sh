@@ -53,6 +53,13 @@ configure_vim() {
     echo -e "${_green}vim has been configured${_nc}"
 }
 
+configure_go() {
+    _install_go_package "golang.org/x/tools/gopls@latest"
+    _install_go_package "github.com/ramya-rao-a/go-outline@v0.0.0-20210608161538-9736a4bde949"
+    _install_go_package "golang.org/x/tools/cmd/goimports@latest"
+    _install_go_package "github.com/rogpeppe/godef@v1.1.2"
+}
+
 configure_vscode() {
     local user_settings_path=$1
 
@@ -75,6 +82,7 @@ configure_vscode() {
     _install_vsc_extension "jdinhlife.gruvbox"
     _install_vsc_extension "hashicorp.terraform"
     _install_vsc_extension "hediet.vscode-drawio"
+    _install_vsc_extension "golang.go"
 
     echo -e "${_green}vscode has been configured${_nc}"
 }
@@ -121,6 +129,12 @@ _create_symlink() {
     else
         echo "symlink has been already created"
     fi
+}
+
+_install_go_package() {
+    local package=$1
+    echo -e "=> ${_cyan}installing go package:${_nc} ${package}"
+    go install -v "${package}"
 }
 
 _install_vsc_extension() {

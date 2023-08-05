@@ -25,6 +25,7 @@ source os/macos/settings.sh
 settings_system
 settings_finder
 settings_safari
+settings_xcode
 
 source scripts/brew.sh
 brew_install
@@ -47,4 +48,5 @@ brew_cleanup
 source scripts/configure.sh
 configure_zsh
 configure_vim
+configure_go
 configure_vscode "${HOME}/Library/Application Support/Code/User"
