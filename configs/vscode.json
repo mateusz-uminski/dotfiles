@@ -1,6 +1,6 @@
 {
   // workbench
-  "workbench.colorTheme": "Gruvbox Dark Medium"
+  "workbench.colorTheme": "Gruvbox Dark Medium",
 
   // editor
   "editor.tabCompletion": "on",
@@ -25,6 +25,10 @@
     "*.hcl": "terraform"
   },
 
+  "[json]": {
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2
+  },
   "[terraform]": {
     "editor.formatOnSave": true,
     "editor.tabSize": 2
@@ -39,5 +43,12 @@
   },
   "[css]": {
     "editor.tabSize": 2
+  },
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   }
 }

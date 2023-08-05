@@ -81,3 +81,15 @@ settings_safari() {
     echo "enable do not track"
     defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 }
+
+settings_xcode() {
+    echo -e "=> ${_cyan}xcode${_nc}:"
+
+    echo "active developer directory"
+    xcode-select -p
+    if [[ $? != 0 ]]; then
+        echo -e "${_red}bxcode is not installed${_nc}"
+        xcode-select --install
+        xcode-select -p
+    fi
+}
