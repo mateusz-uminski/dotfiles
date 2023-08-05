@@ -1,7 +1,7 @@
 #! /bin/bash
 
 configure_zsh() {
-    echo -e "${_green}configuring zsh${_nc}"
+    echo -e "=> ${_cyan}configuring zshrc${_nc}:"
 
     ls $HOME/.oh-my-zsh > /dev/null 2>&1
     if [[ $? != 0 ]]; then
@@ -13,7 +13,6 @@ configure_zsh() {
     fi
 
     # zshrc
-    echo -e "=> ${_cyan}zshrc:${_nc}"
     _create_symlink "configs/zshrc" "${HOME}/.zshrc"
 
     # install zsh plugins
@@ -24,14 +23,11 @@ configure_zsh() {
 
     # install zsh theme
     _install_custom_zsh_theme "simplified-agnoster.zsh-theme"
-
-    echo -e "${_green}zsh has been configured${_nc}"
 }
 
 configure_vim() {
-    echo -e "${_green}configuring vim${_nc}"
+    echo -e "=> ${_cyan}configuring vim${_nc}:"
 
-    echo -e "=> ${_cyan}vim:${_nc}"
     local vimdir="${HOME}/.vim"
     if [[ ! -d "${vimdir}" ]]; then
         mkdir "${vimdir}"
@@ -47,10 +43,16 @@ configure_vim() {
         echo "vundle has been alredy installed"
     fi
 
-    echo -e "=> ${_cyan}installing vim plugins:${_nc}"
+    echo -e "=> ${_cyan}installing vim plugins:${_nc} vim +PluginInstall +qall"
     vim +PluginInstall +qall
+}
 
-    echo -e "${_green}vim has been configured${_nc}"
+configure_git() {
+    echo -e "=> ${_cyan}configuring git${_nc}:"
+
+    echo "global .gitignore"
+    _create_symlink "configs/gitignore-global" "${HOME}/.gitignore"
+    git config --global core.excludesfile "${HOME}/.gitignore"
 }
 
 configure_go() {
@@ -63,7 +65,7 @@ configure_go() {
 configure_vscode() {
     local user_settings_path=$1
 
-    echo -e "${_green}configuring vscode${_nc}"
+    echo -e "=> ${_cyan}configuring vscode${_nc}:"
 
     local vscdir="${HOME}/.vscode"
     if [[ ! -d "${vscdir}" ]]; then
@@ -71,7 +73,6 @@ configure_vscode() {
     fi
 
     # settings.json
-    echo -e "=> ${_cyan}vscode:${_nc}"
     rm "${user_settings_path}/settings.json"  # delete existing settings
     _create_symlink "configs/vscode.json" "${user_settings_path}/settings.json"
 
@@ -83,16 +84,6 @@ configure_vscode() {
     _install_vsc_extension "hashicorp.terraform"
     _install_vsc_extension "hediet.vscode-drawio"
     _install_vsc_extension "golang.go"
-
-    echo -e "${_green}vscode has been configured${_nc}"
-}
-
-configure_git() {
-    echo -e "${_green}configuring git${_nc}"
-
-    echo -e "=> ${_cyan}global gitignore:${_nc}"
-    _create_symlink "configs/gitignore-global" "${HOME}/.gitignore"
-    git config --global core.excludesfile "${HOME}/.gitignore"
 }
 
 _install_zsh_plugin() {
@@ -122,13 +113,11 @@ _create_symlink() {
 
     cat "${dst}" > /dev/null 2>&1
     if [[ $? != 0 ]]; then
-        echo "creating symlink"
+        echo "creating symlink: ${dst} -> ${src}"
     	local root_dir="$(git rev-parse --show-toplevel)"
         ln -s "${root_dir}/${src}" "${dst}"
-	    echo "symlink created"
-    else
-        echo "symlink has been already created"
     fi
+	echo "symlink created: ${dst} -> ${src}"
 }
 
 _install_go_package() {
