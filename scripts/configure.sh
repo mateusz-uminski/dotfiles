@@ -80,10 +80,23 @@ configure_vscode() {
     _install_vsc_extension "ms-python.python"
     _install_vsc_extension "ms-python.isort"
     _install_vsc_extension "ms-python.vscode-pylance"
+    _install_vsc_extension "ms-python.flake8"
+    _install_vsc_extension "ms-azuretools.vscode-docker"
+    _install_vsc_extension "ms-kubernetes-tools.vscode-kubernetes-tools"
     _install_vsc_extension "jdinhlife.gruvbox"
     _install_vsc_extension "hashicorp.terraform"
     _install_vsc_extension "hediet.vscode-drawio"
     _install_vsc_extension "golang.go"
+}
+
+configure_install_additional_software() {
+    echo -e "=> ${_cyan}installing additional software${_nc}:"
+
+    # npm
+    _install_npm_package "release-please"
+
+    # python
+    _install_python_package "molecule-plugins[docker]"
 }
 
 _install_zsh_plugin() {
@@ -130,4 +143,16 @@ _install_vsc_extension() {
     local extension=$1
     echo -e "=> ${_cyan}installing vscode extension:${_nc} ${extension}"
     code --install-extension "${extension}" --force
+}
+
+_install_npm_package() {
+    local package=$1
+    echo -e "=> ${_cyan}installing npm package:${_nc} ${package}"
+    npm -i "${package}" -g
+}
+
+_install_python_package() {
+    local package=$1
+    echo -e "=> ${_cyan}installing python package:${_nc} ${package}"
+    python3 -m pip install --user "${package}""
 }
