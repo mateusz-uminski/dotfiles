@@ -45,3 +45,4 @@ configure_go
 configure_git
 configure_vscode "${HOME}/Library/Application Support/Code/User"
 configure_install_additional_software()
+configure_vault
