@@ -12,6 +12,7 @@ cask "firefox"
 cask "visual-studio-code"
 cask "vagrant"
 cask "openlens"
+# cask "virtualbox"
 
 cask "spotify"
 

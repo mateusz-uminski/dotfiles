@@ -79,3 +79,14 @@ alias ll='gls -la --color=auto --group-directories-first'
 alias grep='grep --color=auto --exclude-dir=.git'
 alias svim='sudo vim'
 alias qssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+
+# java
+export JAVA_HOME="$(brew --prefix openjdk@17)"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# added by docker desktop
+source ${HOME}/.docker/init-zsh.sh || true
+
+# vault
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/vault vault

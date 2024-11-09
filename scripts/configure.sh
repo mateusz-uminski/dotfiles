@@ -85,8 +85,12 @@ configure_vscode() {
     _install_vsc_extension "ms-kubernetes-tools.vscode-kubernetes-tools"
     _install_vsc_extension "jdinhlife.gruvbox"
     _install_vsc_extension "hashicorp.terraform"
+    _install_vsc_extension "hashicorp.hcl"
     _install_vsc_extension "hediet.vscode-drawio"
     _install_vsc_extension "golang.go"
+    _install_vsc_extension "vscjava.vscode-java-pack"
+    _install_vsc_extension "vmware.vscode-boot-dev-pack"
+    _install_vsc_extension "ms-vscode-remote.remote-ssh"
 }
 
 configure_install_additional_software() {
@@ -97,6 +101,12 @@ configure_install_additional_software() {
 
     # python
     _install_python_package "molecule-plugins[docker]"
+}
+
+configure_vault() {
+    echo -e "=> ${_cyan}configuring vault${_nc}:"
+
+    vault -autocomplete-install
 }
 
 _install_zsh_plugin() {
@@ -154,5 +164,5 @@ _install_npm_package() {
 _install_python_package() {
     local package=$1
     echo -e "=> ${_cyan}installing python package:${_nc} ${package}"
-    python3 -m pip install --user "${package}""
+    python3 -m pip install --user "${package}"
 }
