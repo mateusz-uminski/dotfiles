@@ -52,6 +52,7 @@ brew "gradle"
 brew "poetry"
 brew "golang-migrate"
 brew "krew"
+brew "golangci-lint"
 
 brew "hashicorp/tap/terraform"
 brew "hashicorp/tap/packer"
